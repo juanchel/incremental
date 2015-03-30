@@ -1,21 +1,26 @@
 jQuery(document).ready(function() {
-	function close_accordion_section() {
+	jQuery('.accordion-button-open').click(function(e) {
+		jQuery('.accordion .accordion-section-title').addClass('active');
+		jQuery('.accordion .accordion-section-content').slideDown(300).addClass('open');
+	});
+
+	jQuery('.accordion-button-close').click(function(e) {
+		
 		jQuery('.accordion .accordion-section-title').removeClass('active');
 		jQuery('.accordion .accordion-section-content').slideUp(300).removeClass('open');
-	}
+	});
 
 	jQuery('.accordion-section-title').click(function(e) {
 		// Grab current anchor value
 		var currentAttrValue = jQuery(this).attr('href');
 
 		if(jQuery(e.target).is('.active')) {
-			//close_accordion_section();
+			// Remove active class from section title
 			jQuery(this).removeClass('active');
+			// Close the content panel
 			jQuery('.accordion ' + currentAttrValue).slideUp(300).removeClass('open');
 
 		}else {
-			//close_accordion_section();
-
 			// Add active class to section title
 			jQuery(this).addClass('active');
 			// Open up the hidden content panel
