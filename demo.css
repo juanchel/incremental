@@ -100,6 +100,57 @@ body {
     width:300px;
 }
 
+/* NOTIFICATIONS */
+
+.notifications {
+    width: 250px;
+    border: solid 1px #000;
+    float: left;
+    margin-right: 10px;
+}
+
+.notifications .inner {
+    height: 300px;
+    overflow: scroll;
+}
+
+.notifications .inner-item {
+    position: relative;
+    padding: 10px;
+}
+
+.notifications .close-x {
+    position: absolute;
+    top: -6px;
+    right: 2px;
+    font-size: 14pt;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+
+.notifications .close-x:hover {
+    text-shadow:
+    -1px -1px 0 #f00,
+    1px -1px 0 #f00,
+    -1px 1px 0 #f00,
+    1px 1px 0 #f00;
+}
+
+/* BATTLE LOG */
+
+.battle-log {
+    border: solid 1px #000;
+    width: 687px;
+    height: 332px;
+    background: #eee;
+    float: left;
+    padding: 0px 8px;
+}
+
+.battle-event {
+    font-size:11pt;
+    border-bottom: solid 1px #aac;
+}
+
 /* PANEL OF MIRACLES */
 
 .miracle-panel {
@@ -320,7 +371,7 @@ body {
 .research {
     border: solid 1px #000;
     padding: 3px;
-    background: #aaa;
+    background: #888;
     position: relative;
     height: 28px;
     margin-top: 6px;
@@ -345,19 +396,35 @@ body {
 .research progress {
     position: absolute;
     z-index: 1;
-    color: #4b6;
     width: 940px;
     height: 20px;
     border: none;
-    background: #fff;
 }
 
-.research progress::-webkit-progress-bar {
-    background: #ddd;
+.pause progress {
+    background: #eee;
+    color: #6d6;
 }
 
-.research progress::-webkit-progress-value {
-    background: #4b6;
+.start progress {
+    background: #ccc;
+    color: #f88;
+}
+
+.start progress::-webkit-progress-bar {
+    background: #ccc;
+}
+
+.pause progress::-webkit-progress-bar {
+    background: #eee;
+}
+
+.start progress::-webkit-progress-value {
+    background: #f88;
+}
+
+.pause progress::-webkit-progress-value {
+    background: #6d6;
 }
 
 .research-cover {
@@ -375,14 +442,164 @@ body {
 }
 
 .start .research-cover{
-    background: rgba(0,128,0,0.5);
+    background: rgba(0,80,0,0.7);
 }
 
 .pause .research-cover{
-    background: rgba(128,0,0,0.5);
+    background: rgba(80,0,0,0.7);
+}
+
+/* PARTY SELECT */
+
+.party-select {
+    width: 350px;
+    border: solid 1px #000;
+    float: left;
+    margin-right: 10px;
+    height: 500px;
+    background: #fde;
+}
+
+.party-select .inner {
+    height: 460px;
+    overflow: scroll;
+}
+
+.party-select .inner-item{
+    padding: 5px;
+    margin-top: 0px;
+}
+
+.party-info {
+    width: 590px;
+    background: #eee;
+    height: 500px;
+    border: solid 1px #000;
+    float: left;
+    padding: 10px;
+}
+
+.portrait {
+    float: left;
+    height: 74px;
+    width: 74px;
+    background: black;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.hero-main-info {
+    position: relative;
+    font-size: 15pt;
+    line-height: 90%;
+}
+
+.hero-name-class {
+    position: absolute;
+    z-index: 3;
+    font-weight: 700;
+    left: 90px;
+}
+
+.hero-hp {
+    position: absolute;
+    right: 20px;
+    z-index:3;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+
+.hero-xp {
+    position: absolute;
+    right: 20px;
+    z-index:3;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+    top: 36px;
+}
+
+#personal-inventory {
+    float: left;
+}
+
+.hero-main-info progress {
+    z-index: 0;
+    width: 475px;
+    height: 20px;
+    border: solid 1px #888;
+    background: #666;
+    margin:0px;
+}
+
+.hero-main-info progress::-webkit-progress-bar {
+    background: #aaa;
+}
+
+#health-bar {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    color: #64ff7d;
+}
+
+#xp-bar {
+    position: absolute;
+    top: 43px;
+    right: 10px;
+    color: #d9ff30;
+}
+
+#xp-bar::-webkit-progress-value {
+    background: #d9ff30;
+}
+
+#health-bar::-webkit-progress-value {
+    background: #64ff7d;
+}
+
+.stats-table {
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+    float:left;
+    margin-left:10px;
+    height:74px;
+    background: #ccc;
+    width:70px;
+    padding:3px;
+    text-align: center;
+}
+
+.stats-table::first-line {
+    font-weight: 700;
+    color: #f00;
+}
+
+.hero-skills {
+    height:300px;
+    overflow:scroll;
+}
+
+.skill-slot {
+    width: 560px;
+    background: #fff;
+    border:solid 1px #000;
+    padding: 5px;
+    position: relative;
+}
+
+.skill-slot ~ .skill-slot {
+    border-top: none;
+}
+
+.cooldown {
+    position: absolute;
+    float:right;
+    right: 5px;
+    top: 0px;
 }
 
 /* INVENTORY */
+
+.inventory-table {
+    margin-bottom:10px;
+}
 
 .inventory-row {
     display: flex;
@@ -432,6 +649,15 @@ body {
     background-position: -34px -34px;
 }
 
+.item-desc {
+    float:right;
+    height: 227px;
+    width: 635px;
+    background: #eef;
+    border: solid 1px #000;
+    padding: 5px;
+}
+
 /* TEXT STYLES */
 
 .header-text {
@@ -446,6 +672,11 @@ body {
 
 .bold-amber {
     color: #ee6914;
+    font-weight: 700;
+}
+
+.bold-blue {
+    color: #000080;
     font-weight: 700;
 }
 

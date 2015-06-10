@@ -83,7 +83,7 @@ $(document).ready(function () {
                 var canMoveIntoSlot = verifyWithWhiteBlackLists(itemTypeListArray, itemFilterWhitelistArray, itemFilterBlacklistArray)
 
                 if (!canMoveIntoSlot) {
-                    console.log("Can't move to this slot");
+                    //console.log("Can't move to this slot");
                     //$(ui.sender).sortable('cancel');
                     $(ui.item).parentToAnimate($(ui.sender), 200);
                 } else {
@@ -119,11 +119,11 @@ $(document).ready(function () {
         // Else return false
 
 
-        console.group("Lists");
-        console.log(itemList);
-        console.log(whiteList);
-        console.log(blackList);
-        console.groupEnd();
+        //console.group("Lists");
+        //console.log(itemList);
+        //console.log(whiteList);
+        //console.log(blackList);
+        //console.groupEnd();
 
         // If white and black lists are empty, return true
         // Save the calculations, no filtering

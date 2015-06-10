@@ -2,7 +2,6 @@ var gold = 0;
 var goldDelta = 0;
 var curHireCost = 10;
 var bountifulGold = 10;
-var researchPer = 10;
 
 function Hire(job, worth, cost, multBy) {
     this.job = job;
@@ -38,10 +37,20 @@ function takeStep() {
         curResearch[key].progress += researchPer;
         $('#' + key + ' progress').attr('value', curResearch[key].progress);
         $('#' + key + ' .research-time').text(Math.ceil((curResearch[key].cost - curResearch[key].progress) / researchPer / 10));
+        // When a research finishes
         if (curResearch[key].progress >= curResearch[key].cost) {
             toRemove.push(key);
             curResearch[key].effect();
             $('#' + key).remove();
+            $nDiv = $('<div>', {class: 'inner-item'});
+            $nDiv.html('Project completed:<br/><span class="bold-amber">' + curResearch[key].gameName + '</span>');
+            $nX = $('<div>', {class: 'close-x'});
+            $nX.html('x');
+            $nX.click(function() {
+                $(this).parent().slideUp(500, function() {$(this).remove();});
+            });
+            $nDiv.append($nX);
+            $('.notifications .inner').append($nDiv);
         }
     }
     for (var i = 0; i < toRemove.length; i++) {
@@ -65,6 +74,7 @@ function calcGoldDelta() {
 
 $(document).ready(function () {
     setInterval(takeStep, 100);
+    showResearch('rs-build-keep');
 
     // Bountiful miracle
     $('#bountiful').click(function() {
@@ -103,21 +113,5 @@ $(document).ready(function () {
         $('.hire-info-unique.' + curHire.job + ' .job-special-total').text(curHire.special * curHire.amount);
 
         if (curHire == farmer) {calcBountifulGold();}
-    });
-
-    // When the user clicks research
-    $('.research').click(function () {
-        if ($(this).hasClass('start')) {
-            $(this).removeClass('start');
-            $(this).addClass('pause');
-            $(this).find('.research-cover').html('PAUSE PROJECT');
-            curResearch[$(this).attr('id')] = allResearch[$(this).attr('id')];
-        } else {
-            $(this).removeClass('pause');
-            $(this).addClass('start');
-            $(this).find('.research-cover').html('RESUME PROJECT');
-            delete curResearch[$(this).attr('id')];
-            availResearch[$(this).attr('id')] = allResearch[$(this).attr('id')];
-        }
     });
 });
