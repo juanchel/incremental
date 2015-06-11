@@ -4,11 +4,12 @@
     <head>
         <title>Incremental</title>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" type="text/css" href="demo.css">
+        <link rel="stylesheet" type="text/css" href="css/demo.css">
         <link href='http://fonts.googleapis.com/css?family=Oxygen:300,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="js/prof.js"></script>
         <script type="text/javascript" src="js/research.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/accordion.js"></script>
@@ -107,12 +108,12 @@
                                 <span class="hire-info-unique farmer">
                                     <span class="header-text">Farmer</span><br/><br/>
                                     <span class="bold-aqua">Farmers</span> increase the gold you gain every time you use the <span class="bold-aqua">Bountiful Sunlight</span> miracle.<br/><br/>
-                                    <span class="bold-amber">Bountiful Sunlight</span>: +<span class="job-special-per number">1</span> <span class="gold-g">G</span> (<span class="bold-amber">Total</span>: +<span class="job-special-total number">0</span>)
+                                    <span class="bold-amber">Bountiful Sunlight</span>: +<span class="job-special-per">1</span> <span class="gold-g">G</span> (<span class="bold-amber">Total</span>: +<span class="job-special-total">0</span>)
                                 </span>
                                 <span class="hire-info-unique hunter">
                                     <span class="header-text">Hunter</span><br/><br/>
                                     <span class="bold-aqua">Hunters</span> are basic workers that don't do anything special, but they are cheap to hire and provide <span class="bold-aqua">gold</span>.<br/><br/>
-                                    <span class="bold-amber">Gold</span>: <span class="job-delta-per number">1</span> <span class="gold-g">G</span>/sec (<span class="bold-amber">Total</span>: <span class="job-delta-total number">0</span>)
+                                    <span class="bold-amber">Gold</span>: <span class="job-delta-per">1</span> <span class="gold-g">G</span>/sec (<span class="bold-amber">Total</span>: <span class="job-delta-total">0</span>)
                                 </span>
                             </div>
                         </div>
@@ -203,7 +204,15 @@
                             </div>
                         </div>
                         <div class="item-desc">
-                            hey
+                            <b>Bronze Sword</b></br>1 Handed Sword<br/>
+                            <div class="item-stat">25 ATK</div>
+                            <div class="item-stat">25 INT</div>
+                            <div class="item-stat">10% Crit Chance</div>
+                            <div style="clear:both"></div>
+                            <div class="item-flavor">A common bronze sword.</div>
+                            <div class="item-right">
+                                250 <span class="gold-g">G</span><br/> L25 Normal Item
+                            </div>
                         </div>
                     </div>
                     <!--end .accordion-section-content-->
@@ -215,10 +224,47 @@
                         <div class="party-select">
                             <div class="title">Heroes</div>
                             <div class="inner">
-                                <div class="inner-item"><span class="number">L32</span> Warrior <b>Gunkar</b></div>
+                                <div class="inner-item">
+                                    <span class="number">L32</span> Warrior <b>Gunkar</b>
+                                    <div class="hero-sort">+</div>
+                                </div>
+                                <div class="inner-item">
+                                    <span class="number">L25</span> Mage <b>Raven</b>
+                                    <div class="hero-sort">+</div>
+                                </div>
+                                <div class="inner-item">
+                                    <span class="number">L28</span> Rogue <b>Droid</b>
+                                    <div class="hero-sort">+</div>
+                                </div>
+                            </div>
+                            <div class="party-options">
+                                <a class="party-option-button" id="hire-hero-select-button">Hire Hero</a>
+                                <a class="party-option-button" href="#modal-confirm">Dismiss Hero</a>
+                                <a class="party-option-button" href="#modal-confirm">Delete Skill</a>
                             </div>
                         </div>
-                        <div class="party-info">
+                        <div class="party-info" id="buy-hero-info">
+                            <div class="class-select">
+                                <select id="hero-class">
+                                    <option value="warrior">Warrior</option>
+                                    <option value="mage">Mage</option>
+                                </select>
+                                <select>
+                                    <option>Level 1</option>
+                                    <option>Low Level</option>
+                                    <option>Standard Level</option>
+                                    <option>High Level</option>
+                                </select>
+                                <select>
+                                    <option>Normal</option>
+                                </select>
+                            </div>
+                            <br/>
+                            <span id="class-desc">why</span><br/><br/>
+                            <span id="level-desc">Your hero will start at level 1.</span><br/><br/>
+                            <span id="power-desc">Your hero's individual stat growths will be normal, with a chance to have a bonus.</span>
+                        </div>
+                        <div class="party-info" id="view-hero-info">
                             <div class="portrait"></div>
                             <div class="hero-main-info">
                                 <progress id='health-bar' max='100' value='50'></progress>
@@ -260,9 +306,9 @@
                             5 slots left
                             <div class="hero-skills">
                                 <div class="skill-slot">
-                                    <span class="bold-aqua">Bleeding Strike</span> Attack modifier
+                                    <span class="bold-aqua">Bleeding Strike</span>
                                     <br/>Attacks deal 50% damage, but bleed the target for 25% damage for 4 turns and then something
-                                    <div class="cooldown">30&#128343;</div>
+                                    <div class="cooldown">30 &#128343;</div>
                                 </div>
                             </div>
                         </div>
@@ -274,6 +320,15 @@
             </div>
             <!--end .accordion-->
         </div>
+    <div class="modal" id="modal-confirm" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-body">
+                Are you sure you want to delete?
+            </div>
+            <div class="modal-fotter">
+                <a href="#close" class="btn">Yes</a>
+            </div>
+        </div>
+    </div>
     </body>
-
 </html>

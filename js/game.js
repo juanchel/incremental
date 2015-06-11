@@ -114,4 +114,22 @@ $(document).ready(function () {
 
         if (curHire == farmer) {calcBountifulGold();}
     });
+
+    // When the user selects a class to hire
+    $('#hero-class').change( function () {
+        $('#class-desc').html(allProfs[$(this).val()].desc);
+    });
+
+    // When the user clicks on the + or - to sort the party
+    $('.hero-sort').click(function() {
+        if (!$(this).parent().hasClass('in-party')) {
+            $(this).parent().insertAfter($('.party-select .in-party:last'));
+            $(this).parent().addClass('in-party');
+            $(this).html('&ndash;');
+        } else {
+            $(this).parent().removeClass('in-party');
+            $(this).html('+');
+            $(this).parent().insertAfter($('.party-select .in-party:last'));
+        }
+    });
 });

@@ -112,88 +112,17 @@ $(document).ready(function () {
     }
 
     function verifyWithWhiteBlackLists(itemList, whiteList, blackList) {
-        // itemList should contain tags
-        // whiteList and blackList can contain tags and tag queries
-
-        // If we have a matching tags to some tag query in the whiteList but not in the blackList, then return true
-        // Else return false
-
-
-        //console.group("Lists");
-        //console.log(itemList);
-        //console.log(whiteList);
-        //console.log(blackList);
-        //console.groupEnd();
-
-        // If white and black lists are empty, return true
-        // Save the calculations, no filtering
-        if (whiteList.length == 0 && blackList.length == 0) return true;
-
-
-
-        // Check if the itemList has an item in the blackList
-        var inBlackList = false;
-        $.each(blackList, function (index, value) {
-            var itemBlack = value;
-            var itemBlackAndArray = itemBlack.split(/\+/);
-            console.log(itemBlackAndArray);
-
-            var andedResult = true;
-            for (var i = 0; i < itemBlackAndArray.length; i++) {
-                if (blackList.length > 0 && $.inArray(itemBlackAndArray[i], itemList) !== -1) {
-                    andedResult = andedResult && true;
-                } else {
-                    andedResult = andedResult && false;
-                }
-            }
-
-            if (andedResult) inBlackList = true;
-        });
-
-        inBlackList = blackList.length > 0 ? inBlackList : false;
-
-
-        // Check if the itemList has an item in the whiteList
-        var inWhiteList = false;
-        $.each(whiteList, function (index, value) {
-            var itemWhite = value;
-            var itemWhiteAndArray = itemWhite.split(/\+/);
-            //console.log(itemWhiteAndArray);
-
-            var andedResult = true;
-            for (var i = 0; i < itemWhiteAndArray.length; i++) {
-                if (whiteList.length > 0 && $.inArray(itemWhiteAndArray[i], itemList) !== -1) {
-                    andedResult = andedResult && true;
-                } else {
-                    andedResult = andedResult && false;
-                }
-            }
-            //console.log("andedResult: " + andedResult);
-
-            if (andedResult) inWhiteList = true;
-
-        });
-
-        inWhiteList = whiteList.length > 0 ? inWhiteList : false;
-
-
-        console.log("inWhite: " + inWhiteList + " - inBlack: " + inBlackList);
-
-        if ((whiteList.length == 0 || inWhiteList) && !inBlackList) return true;
-
-        return false;
+        return true;
     }
 
     $('.inventory-item').click( function() {
         console.log($(this).parent().parent().parent().attr('id'));
-        if ($(this).parent().parent().parent().attr('id') == "personal-inventory"){
-            if ($(this).hasClass("inventory-selected")) {
-                $('.inventory-item').removeClass("inventory-selected");
-                return;
-            }
+        if ($(this).hasClass("inventory-selected")) {
             $('.inventory-item').removeClass("inventory-selected");
-            $(this).addClass("inventory-selected");
+            return;
         }
+        $('.inventory-item').removeClass("inventory-selected");
+        $(this).addClass("inventory-selected");
     });
 
 });
