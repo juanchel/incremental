@@ -16,11 +16,11 @@ function showResearch (rsName) {
     availResearch[rsName] = allResearch[rsName];
     var $rsDiv = $("<div>", {id: rsName, class: 'research start'});
     var $rsProgress = $("<progress>", {max: allResearch[rsName].cost, value:0});
-    var $rsText = $("<div>", {class: 'research-text'})
+    var $rsText = $("<div>", {class: 'research-text'});
     $rsText.html('<b>' + allResearch[rsName].gameName + '</b> ' + allResearch[rsName].desc);
-    var $rsTime = $("<div>", {class: 'research-time'})
+    var $rsTime = $("<div>", {class: 'research-time'});
     $rsTime.html(Math.ceil((allResearch[rsName].cost - allResearch[rsName].progress) / researchPer / 10));
-    var $rsCover = $("<div>", {class: 'research-cover'})
+    var $rsCover = $("<div>", {class: 'research-cover'});
     $rsCover.html('START PROJECT');
 
     $rsDiv.click(function () {
@@ -57,5 +57,5 @@ function firstMiracleEffect() {
 
 var allResearch = {
     'rs-build-keep': rsBuildKeep,
-    'rs-first-miracle': rsFirstMiracle
+    'rs-first-miracle': rsFirstMiracle,
 };

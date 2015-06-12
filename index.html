@@ -4,13 +4,20 @@
     <head>
         <title>Incremental</title>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" type="text/css" href="css/demo.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/accordion.css">
+        <link rel="stylesheet" type="text/css" href="css/log.css">
+        <link rel="stylesheet" type="text/css" href="css/keep.css">
+        <link rel="stylesheet" type="text/css" href="css/research.css">
+        <link rel="stylesheet" type="text/css" href="css/inventory.css">
+        <link rel="stylesheet" type="text/css" href="css/party.css">
         <link href='http://fonts.googleapis.com/css?family=Oxygen:300,700' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/prof.js"></script>
         <script type="text/javascript" src="js/research.js"></script>
+        <script type="text/javascript" src="js/prof.js"></script>
+        <script type="text/javascript" src="js/hero.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/accordion.js"></script>
         <script type="text/javascript" src="js/inventory.js"></script>
@@ -22,22 +29,6 @@
             <div class="btn accordion-button-open">Open all</div>
             <br style="clear:left" />
             <div class="accordion">
-                <div class="accordion-section">
-                    <div class="accordion-section-title" href="#accordion-4">Log</div>
-                    <div id="accordion-4" class="accordion-section-content">
-                        <div class="notifications">
-                            <div class="title">Notifications</div>
-                            <div class="inner">
-                            </div>
-                        </div>
-                        <div class="battle-log">
-
-                        </div>
-                        <div style="clear:both"></div>
-                    </div>
-                    <!--end .accordion-section-content-->
-                </div>
-                <!--end .accordion-section-->
                 <div class="accordion-section">
                     <div class="accordion-section-title" href="#accordion-1">Keep</div>
                     <div id="accordion-1" class="accordion-section-content">
@@ -223,22 +214,10 @@
                     <div id="accordion-5" class="accordion-section-content">
                         <div class="party-select">
                             <div class="title">Heroes</div>
-                            <div class="inner">
-                                <div class="inner-item">
-                                    <span class="number">L32</span> Warrior <b>Gunkar</b>
-                                    <div class="hero-sort">+</div>
-                                </div>
-                                <div class="inner-item">
-                                    <span class="number">L25</span> Mage <b>Raven</b>
-                                    <div class="hero-sort">+</div>
-                                </div>
-                                <div class="inner-item">
-                                    <span class="number">L28</span> Rogue <b>Droid</b>
-                                    <div class="hero-sort">+</div>
-                                </div>
+                            <div class="inner" id="heroes-list">
                             </div>
                             <div class="party-options">
-                                <a class="party-option-button" id="hire-hero-select-button">Hire Hero</a>
+                                <a class="party-option-button" id="hire-hero-button">Hire Hero</a>
                                 <a class="party-option-button" href="#modal-confirm">Dismiss Hero</a>
                                 <a class="party-option-button" href="#modal-confirm">Delete Skill</a>
                             </div>
@@ -249,20 +228,30 @@
                                     <option value="warrior">Warrior</option>
                                     <option value="mage">Mage</option>
                                 </select>
-                                <select>
-                                    <option>Level 1</option>
-                                    <option>Low Level</option>
-                                    <option>Standard Level</option>
-                                    <option>High Level</option>
+                                <select id="hero-level-mult">
+                                    <option value="one">Level 1</option>
+                                    <option value="low">Low Level</option>
+                                    <option value="norm">Normal Level</option>
+                                    <option value="high">High Level</option>
                                 </select>
-                                <select>
-                                    <option>Normal</option>
+                                <select id="hero-stat-type">
+                                    <option value="normal">Normal</option>
+                                    <option value="adept">Adept</option>
+                                    <option value="master">Master</option>
+                                    <option value="retired">Retired</option>
+                                    <option value="strong">Strong</option>
+                                    <option value="intelligent">Intelligent</option>
+                                    <option value="agile">Agile</option>
+                                    <option value="chaotic">Chaotic</option>
+                                    <option value="lawful">Lawful</option>
                                 </select>
                             </div>
                             <br/>
-                            <span id="class-desc">why</span><br/><br/>
+                            <span id="class-desc">Warriors do this and that</span><br/><br/>
                             <span id="level-desc">Your hero will start at level 1.</span><br/><br/>
-                            <span id="power-desc">Your hero's individual stat growths will be normal, with a chance to have a bonus.</span>
+                            <span id="stat-desc">Your hero's individual stat growths will be normal, with a chance to have a bonus.</span><br/><br/>
+                            Total cost: <span id="hire-hero-cost">8000</span> <span class="gold-g">G</span>
+                            <div class="purchase-button" id="hire-hero-confirm">Hire</div>
                         </div>
                         <div class="party-info" id="view-hero-info">
                             <div class="portrait"></div>
@@ -311,6 +300,22 @@
                                     <div class="cooldown">30 &#128343;</div>
                                 </div>
                             </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <!--end .accordion-section-content-->
+                </div>
+                <!--end .accordion-section-->
+                <div class="accordion-section">
+                    <div class="accordion-section-title" href="#accordion-4">Log</div>
+                    <div id="accordion-4" class="accordion-section-content">
+                        <div class="notifications">
+                            <div class="title">Notifications</div>
+                            <div class="inner">
+                            </div>
+                        </div>
+                        <div class="battle-log">
+
                         </div>
                         <div style="clear:both"></div>
                     </div>

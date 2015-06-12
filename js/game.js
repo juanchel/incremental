@@ -2,6 +2,8 @@ var gold = 0;
 var goldDelta = 0;
 var curHireCost = 10;
 var bountifulGold = 10;
+var heroHireCost = 100;
+var maxLevel = 100;
 
 function Hire(job, worth, cost, multBy) {
     this.job = job;
@@ -72,7 +74,16 @@ function calcGoldDelta() {
     return delta;
 }
 
-$(document).ready(function () {
+function calcHeroHireCost() {
+    baseCost = allProfs[$('#hero-class').val()].baseCost;
+    levelMult = levelMults[$('#hero-level-mult').val()].costMult;
+    statTypeCost = statTypes[$('#hero-stat-type').val()].costMult;
+    hhc = baseCost * levelMult * statTypeCost;
+    $("#hire-hero-cost").text(hhc / 10);
+    return hhc;
+}
+
+$(document).ready(function() {
     setInterval(takeStep, 100);
     showResearch('rs-build-keep');
 
@@ -82,7 +93,7 @@ $(document).ready(function () {
     });
 
     // When the user clicks on a hire bar to view more information
-    $('.hire-table .inner-item').click( function() {
+    $('.hire-table .inner-item').click(function() {
         $('.hire-info-content .purchase-button').show();
         $('.hire-info-unique').hide();
         $('.hire-table .inner-item').removeClass("hire-selected");
@@ -100,7 +111,7 @@ $(document).ready(function () {
     });
 
     // When the user tries to click the hire button
-    $('.hire-info .purchase-button').click( function () {
+    $('.hire-info .purchase-button').click(function() {
         curHire.amount += 1;
         gold -= curHire.curCost;
         curHire.mult *= curHire.multBy;
@@ -115,21 +126,56 @@ $(document).ready(function () {
         if (curHire == farmer) {calcBountifulGold();}
     });
 
-    // When the user selects a class to hire
-    $('#hero-class').change( function () {
-        $('#class-desc').html(allProfs[$(this).val()].desc);
+    // When the user tries to hire a hero
+    $('#hire-hero-confirm').click(function() {
+        levelMult = Math.floor(levelMults[$('#hero-level-mult').val()].levelMult * maxLevel) + 1;
+        hiredHero = new Hero('Sam', allProfs[$('#hero-class').val()], levelMult);
+        hiredHero.setInitialStats(statTypes[$('#hero-stat-type').val()]);
+        hiredId = 'hero' + nextHeroId;
+        heroes[hiredId] = hiredHero;
+        nextHeroId++;
+
+        var $heroInnerItem = $("<div>", {id: hiredId, class: 'inner-item'});
+        $heroInnerItem.html('<span class="list-display-level number">L'+hiredHero.level+'</span> <span class="list-display-class">'+hiredHero.prof.profName+'<span> <span class="list-display-name">'+hiredHero.heroName+'</span>');
+        var $heroSort = $("<div>", {class: 'hero-sort'});
+        $heroSort.html('+');
+        $heroSort.click(function() {
+            if (!$(this).parent().hasClass('in-party')) {
+                $(this).parent().insertBefore($('.party-select .inner-item:first'));
+                $(this).parent().insertAfter($('.party-select .in-party:last'));
+                $(this).parent().addClass('in-party');
+                $(this).html('&ndash;');
+            } else {
+                $(this).parent().removeClass('in-party');
+                $(this).html('+');
+                $(this).parent().insertAfter($('.party-select .in-party:last'));
+            }
+        });
+        $heroInnerItem.append($heroSort);
+        $('#heroes-list').append($heroInnerItem);
     });
 
-    // When the user clicks on the + or - to sort the party
-    $('.hero-sort').click(function() {
-        if (!$(this).parent().hasClass('in-party')) {
-            $(this).parent().insertAfter($('.party-select .in-party:last'));
-            $(this).parent().addClass('in-party');
-            $(this).html('&ndash;');
-        } else {
-            $(this).parent().removeClass('in-party');
-            $(this).html('+');
-            $(this).parent().insertAfter($('.party-select .in-party:last'));
-        }
+    // When the user selects a class to hire
+    $('#hero-class').change(function() {
+        $('#class-desc').html(allProfs[$(this).val()].desc);
+        calcHeroHireCost();
+    });
+    
+    // When the user selects a class to hire
+    $('#hero-level-mult').change(function() {
+        $('#level-desc').html(levelMults[$(this).val()].desc);
+        calcHeroHireCost();
+    });
+
+    // When the user selects a class to hire
+    $('#hero-stat-type').change(function() {
+        $('#stat-desc').html(statTypes[$(this).val()].desc);
+        calcHeroHireCost();
+    });
+
+    // When the user clicks the hire hero button to view the hire meu
+    $('#hire-hero-button').click(function() {
+        $('#buy-hero-info').show();
+        $('#view-hero-info').hide();
     });
 });
