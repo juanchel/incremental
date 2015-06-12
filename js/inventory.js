@@ -116,7 +116,6 @@ $(document).ready(function () {
     }
 
     $('.inventory-item').click( function() {
-        console.log($(this).parent().parent().parent().attr('id'));
         if ($(this).hasClass("inventory-selected")) {
             $('.inventory-item').removeClass("inventory-selected");
             return;

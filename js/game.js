@@ -137,8 +137,21 @@ $(document).ready(function() {
 
         var $heroInnerItem = $("<div>", {id: hiredId, class: 'inner-item'});
         $heroInnerItem.html('<span class="list-display-level number">L'+hiredHero.level+'</span> <span class="list-display-class">'+hiredHero.prof.profName+'<span> <span class="list-display-name">'+hiredHero.heroName+'</span>');
+
+        // When the user clicks on the hero to show information
+        $heroInnerItem.click(function() {
+            $('#buy-hero-info').hide();
+            $('#view-hero-info').show();
+            $('.hero-selected').removeClass('hero-selected');
+            $(this).addClass('hero-selected');
+
+            toDisplay = heroes[$(this).attr('id')];
+            updateDisplay(toDisplay);
+        });
         var $heroSort = $("<div>", {class: 'hero-sort'});
         $heroSort.html('+');
+
+        // When the user tries to add or remove hero from party
         $heroSort.click(function() {
             if (!$(this).parent().hasClass('in-party')) {
                 $(this).parent().insertBefore($('.party-select .inner-item:first'));

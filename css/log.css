@@ -8,7 +8,7 @@
 }
 .notifications .inner {
     height: 300px;
-    overflow: scroll;
+    overflow: auto;
 }
 .notifications .inner-item {
     position: relative;

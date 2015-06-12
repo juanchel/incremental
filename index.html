@@ -9,6 +9,7 @@
         <link rel="stylesheet" type="text/css" href="css/log.css">
         <link rel="stylesheet" type="text/css" href="css/keep.css">
         <link rel="stylesheet" type="text/css" href="css/research.css">
+        <link rel="stylesheet" type="text/css" href="css/shop.css">
         <link rel="stylesheet" type="text/css" href="css/inventory.css">
         <link rel="stylesheet" type="text/css" href="css/party.css">
         <link href='http://fonts.googleapis.com/css?family=Oxygen:300,700' rel='stylesheet' type='text/css'>
@@ -18,6 +19,7 @@
         <script type="text/javascript" src="js/research.js"></script>
         <script type="text/javascript" src="js/prof.js"></script>
         <script type="text/javascript" src="js/hero.js"></script>
+        <script type="text/javascript" src="js/item.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
         <script type="text/javascript" src="js/accordion.js"></script>
         <script type="text/javascript" src="js/inventory.js"></script>
@@ -121,6 +123,32 @@
                 </div>
                 <!--end .accordion-section-->
                 <div class="accordion-section">
+                    <div class="accordion-section-title" href="#accordion-6">Shop</div>
+                    <div id="accordion-6" class="accordion-section-content">
+                        <div class="shop-item">
+                            <div class="shop-item-pic"></div>
+                            <div class="shop-item-name">Bronze Sword</div>
+                            2000<span class="gold-g"> G<br/></span>1 Handed Sword<br/>L25 Common Item<br/>
+                            <div class="shop-item-stat">25 INT</div>
+                            <div class="shop-item-stat">25 DEF</div>
+                            <div class="purchase-button">BUY</span></div>
+                        </div>
+                        <div class="shop-item">
+                            SOLD OUT
+                        </div>
+                        <div class="shop-item">
+                            SOLD OUT
+                        </div>
+                        <div class="shop-item">
+                            SOLD OUT
+                        </div>
+                        <div style="clear:both"></div>
+                        <div id="refresh-shop">&#8635; SHUFFLE SHOP [5 LEFT]</div>
+                    </div>
+                    <!--end .accordion-section-content-->
+                </div>
+                <!--end .accordion-section-->
+                <div class="accordion-section">
                     <div class="accordion-section-title" href="#accordion-2">Inventory</div>
                     <div id="accordion-2" class="accordion-section-content">
                         <div class="inventory-table" id="personal-inventory">
@@ -138,7 +166,6 @@
                                 <div class="inventory-cell"></div>
                                 <div class="inventory-cell"></div>
                             </div>
-
                             <div class="inventory-row">
                                 <div class="inventory-cell">
                                     <div class="inventory-item grape"></div>
@@ -256,11 +283,11 @@
                         <div class="party-info" id="view-hero-info">
                             <div class="portrait"></div>
                             <div class="hero-main-info">
-                                <progress id='health-bar' max='100' value='50'></progress>
-                                <progress id='xp-bar' max='100' value='20'></progress>
-                                <div class="hero-name-class">Gunkar<br/><br/>L32 Class</div>
-                                <div class="hero-hp">2000<span style='font-size:12pt'>5000</span></div>
-                                <div class="hero-xp">2000<span style='font-size:12pt'>5000</span></div>
+                                <progress id='health-bar' max="100" value="50"></progress>
+                                <progress id='xp-bar' max="100" value="20"></progress>
+                                <div id="hero-name-class">Gunkar<br/><br/>L32 Class</div>
+                                <div id="hero-hp">2000<span style="font-size:12pt">5000</span></div>
+                                <div id="hero-xp">2000<span style="font-size:12pt">5000</span></div>
                             </div>
                             <div style="clear:both"></div>
                             <div class="inventory-table" id="personal-inventory">

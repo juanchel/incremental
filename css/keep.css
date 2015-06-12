@@ -142,17 +142,6 @@
     background: #fff;
     position: relative;
 }
-.hire-info .purchase-button {
-    text-align: center;
-    position: absolute;
-    bottom: 8px;
-    right: 25%;
-    left: 50%;
-    margin-left: -100px;
-    padding: 8px;
-    width: 200px;
-    display: none;
-}
 .hire-info .hire-info-unique {
     display: none;
 }

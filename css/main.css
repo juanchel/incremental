@@ -30,6 +30,14 @@ a:hover {
     border: solid 1px #C48E48;
     font-family: Tahoma, Geneva, sans-serif;
     font-weight: bold;
+    text-align: center;
+    position: absolute;
+    bottom: 8px;
+    right: 25%;
+    left: 50%;
+    margin-left: -100px;
+    padding: 8px;
+    width: 200px;
 }
 .purchase-button:hover {
     background: #ffffb4;

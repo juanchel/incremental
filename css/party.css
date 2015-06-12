@@ -12,7 +12,7 @@
 }
 .party-select .inner {
     height: 410px;
-    overflow: scroll;
+    overflow: auto;
 }
 .party-select .inner-item {
     padding: 5px;
@@ -21,6 +21,24 @@
 }
 .in-party.inner-item {
     border-left: solid 3px #44e;
+}
+.party-select .hero-selected {
+    background: #fdba96;
+    background: -moz-linear-gradient(left, #fdba96 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#fdba96), color-stop(100%,#ffffff));
+    background: -webkit-linear-gradient(left, #fdba96 0%,#ffffff 100%);
+    background: -o-linear-gradient(left, #fdba96 0%,#ffffff 100%);
+    background: -ms-linear-gradient(left, #fdba96 0%,#ffffff 100%);
+    background: linear-gradient(to right, #fdba96 0%,#ffffff 100%);
+}
+.in-party.hero-selected {
+    background: #b0b0ff;
+    background: -moz-linear-gradient(left,  #b0b0ff 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#b0b0ff), color-stop(100%,#ffffff));
+    background: -webkit-linear-gradient(left,  #b0b0ff 0%,#ffffff 100%);
+    background: -o-linear-gradient(left,  #b0b0ff 0%,#ffffff 100%);
+    background: -ms-linear-gradient(left,  #b0b0ff 0%,#ffffff 100%);
+    background: linear-gradient(to right,  #b0b0ff 0%,#ffffff 100%);
 }
 .party-select .inner-item:hover {
     background: #fdba96;
@@ -53,14 +71,6 @@
     position: relative;
 }
 #buy-hero-info .purchase-button {
-    text-align: center;
-    position: absolute;
-    bottom: 8px;
-    right: 25%;
-    left: 50%;
-    margin-left: -100px;
-    padding: 8px;
-    width: 200px;
 }
 .class-select {
     margin: 0 auto;
@@ -97,19 +107,19 @@
     font-size: 15pt;
     line-height: 90%;
 }
-.hero-name-class {
+#hero-name-class {
     position: absolute;
     z-index: 3;
     font-weight: 700;
     left: 90px;
 }
-.hero-hp {
+#hero-hp {
     position: absolute;
     right: 20px;
     z-index: 3;
     font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
 }
-.hero-xp {
+#hero-xp {
     position: absolute;
     right: 20px;
     z-index: 3;
@@ -167,7 +177,7 @@
 }
 .hero-skills {
     height: 300px;
-    overflow: scroll;
+    overflow: auto;
 }
 .skill-slot {
     width: 560px;
