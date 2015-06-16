@@ -1,0 +1,41 @@
+/* NOTIFICATIONS */
+
+.notifications {
+    width: 250px;
+    border: solid 1px #000;
+    float: left;
+    margin-right: 10px;
+}
+.notifications .inner {
+    height: 300px;
+    overflow: auto;
+}
+.notifications .inner-item {
+    position: relative;
+    padding: 10px;
+}
+.notifications .close-x {
+    position: absolute;
+    top: -6px;
+    right: 2px;
+    font-size: 14pt;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+.notifications .close-x:hover {
+    text-shadow: -1px -1px 0 #f88, 1px -1px 0 #f88, -1px 1px 0 #f88, 1px 1px 0 #f88;
+}
+
+/* BATTLE LOG */
+
+.battle-log {
+    border: solid 1px #000;
+    width: 687px;
+    height: 332px;
+    background: #eee;
+    float: left;
+    padding: 0px 8px;
+}
+.battle-event {
+    font-size: 11pt;
+    border-bottom: solid 1px #aac;
+}

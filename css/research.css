@@ -1,0 +1,68 @@
+/* RESEARCH */
+
+.research {
+    border: solid 1px #000;
+    padding: 3px;
+    background: #888;
+    position: relative;
+    height: 28px;
+    margin-top: 6px;
+}
+.research:first-child {
+    margin-top: 0px;
+}
+.research-text {
+    position: absolute;
+    z-index: 2;
+}
+.research-time {
+    position: absolute;
+    z-index: 2;
+    right: 7px;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+.research progress {
+    position: absolute;
+    z-index: 1;
+    width: 940px;
+    height: 20px;
+    border: none;
+}
+.pause progress {
+    background: #eee;
+    color: #6d6;
+}
+.start progress {
+    background: #ccc;
+    color: #f88;
+}
+.start progress::-webkit-progress-bar {
+    background: #ccc;
+}
+.pause progress::-webkit-progress-bar {
+    background: #eee;
+}
+.start progress::-webkit-progress-value {
+    background: #f88;
+}
+.pause progress::-webkit-progress-value {
+    background: #6d6;
+}
+.research-cover {
+    position: absolute;
+    z-index: 3;
+    text-align: center;
+    color: #fff;
+    width: 940px;
+    font-weight: 700;
+    opacity: 0;
+}
+.research-cover:hover {
+    opacity: 1;
+}
+.start .research-cover {
+    background: rgba(0, 80, 0, 0.7);
+}
+.pause .research-cover {
+    background: rgba(80, 0, 0, 0.7);
+}

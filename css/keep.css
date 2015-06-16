@@ -1,0 +1,147 @@
+/* PANEL OF MIRACLES */
+
+.miracle-panel {
+    width: 950px;
+}
+.miracle-button {
+    float: left;
+    height: 80px;
+    width: 310px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+.miracle-cd {
+    position: absolute;
+    right: 1px;
+    top: 0px;
+}
+#bountiful {
+    background: url('../img/bountiful-sunlight.png');
+}
+#judgement {
+    background: url('../img/judgement.png');
+}
+#sancturary {
+    background: url('../img/sancturary.png');
+}
+#witching {
+    background: url('../img/witching.png');
+}
+#melody {
+    background: url('../img/melody.png');
+}
+#kingdom {
+    background: url('../img/kingdom.png');
+}
+.miracle-button.middle {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.miracle-name {
+    position: relative;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+}
+.miracle-desc {
+    opacity: 0;
+    height: 100%;
+    font-size: 10pt;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 5px;
+}
+.miracle-desc:hover {
+    opacity: 1;
+}
+
+/* TABLE OF GOLD AND INCOME */
+
+.bank-table {
+    width: 950px;
+    border: solid 1px #000;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 10px;
+}
+.bank-table td {
+    background: #fde;
+    border: solid 1px #000;
+    color: #333;
+    padding: 5px;
+}
+.bank-table td:nth-child(1) {
+    height: 32px;
+    background: #830;
+    color: #fff;
+    font-weight: 700;
+    width: 180px;
+}
+.bank-table td:nth-child(2) {
+    text-align: right;
+    width: 420px;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+.bank-table td:nth-child(3) {
+    text-align: right;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+}
+.bank-plus {
+    text-align: left;
+    float: left;
+}
+
+/* TABLE AND INFO PANE FOR HIRING FROM THE KEEP */
+
+.hire-table {
+    width: 530px;
+    border: solid 1px #000;
+    float: left;
+}
+.hire-table .inner-item:hover {
+    background: #fdba96;
+}
+.inner-item:first-child {
+    margin-top: 0px;
+}
+.hire-table .hire-amount {
+    padding: 3px;
+    background: #eee;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+    float: left;
+    white-space: pre-wrap;
+}
+.hire-table .hire-title {
+    padding: 3px;
+    float: left;
+}
+.hire-table .hire-cost {
+    padding: 3px;
+    font-family: "Droid Sans Mono", "Lucida Console", Monaco, monospace;
+    float: right;
+}
+.hire-table .hire-selected {
+    background: #fdba96;
+    background: -moz-linear-gradient(left, #fdba96 0%, #ffffff 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, #fdba96), color-stop(100%, #ffffff));
+    background: -webkit-linear-gradient(left, #fdba96 0%, #ffffff 100%);
+    background: -o-linear-gradient(left, #fdba96 0%, #ffffff 100%);
+    background: -ms-linear-gradient(left, #fdba96 0%, #ffffff 100%);
+    background: linear-gradient(to right, #fdba96 0%, #ffffff 100%);
+}
+.hire-info {
+    width: 410px;
+    background: #e0efff;
+    float: right;
+    border: solid 1px #000;
+    height: 410px;
+    padding: 10px;
+}
+.hire-info .hire-info-content {
+    padding: 10px;
+    height: 390px;
+    background: #fff;
+    position: relative;
+}
+.hire-info .hire-info-unique {
+    display: none;
+}
