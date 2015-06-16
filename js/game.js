@@ -5,6 +5,10 @@ var bountifulGold = 10;
 var heroHireCost = 100;
 var maxLevel = 100;
 
+var STAT_TO_STR = {
+    0: 'HP', 1:'ATK', 2:'DEF', 3:'INT', 4:'RES', 5:'AGI'
+}
+
 function Hire(job, worth, cost, multBy) {
     this.job = job;
     this.worth = worth;
@@ -21,6 +25,33 @@ farmer.special = 1;
 var hunter = new Hire("hunter", 1, 500, 1.05);
 
 var curHire = farmer;
+
+// When the user clicks an item to select it
+function itemClick ($thisDiv) {
+    if ($thisDiv.hasClass("inventory-selected")) {
+        $('.inventory-item').removeClass("inventory-selected");
+        return;
+    }
+    $('.inventory-item').removeClass("inventory-selected");
+    $thisDiv.addClass("inventory-selected");
+
+    invenItem = inventoryItems[$thisDiv.data('item-id')];
+    $('#item-desc').html('<b>' + invenItem.itemName + '</b></br>'+invenItem.itemClass+'<br/>');
+    for (var i=0; i<6; i++) {
+        if (invenItem.stats[i] != 0) {
+            $statDiv = $('<div>', {class: 'item-stat'});
+            $statDiv.text(invenItem.stats[i] + ' ' + STAT_TO_STR[i]);
+            $('#item-desc').append($statDiv);
+        }
+    }
+    $('#item-desc').append('<div style="clear:both"></div>');
+    $flavor = $('<div>', {class: 'item-flavor'});
+    $flavor.text('A sword.');
+    $('#item-desc').append($flavor);
+    $right = $('<div>', {class: 'item-right'});
+    $right.html(invenItem.cost+' <span class="gold-g">G</span><br/> L'+invenItem.level+' Common Item');
+    $('#item-desc').append($right);
+}
 
 // Every tick of time
 function takeStep() {
@@ -145,8 +176,8 @@ $(document).ready(function() {
             $('.hero-selected').removeClass('hero-selected');
             $(this).addClass('hero-selected');
 
-            toDisplay = heroes[$(this).attr('id')];
-            updateDisplay(toDisplay);
+            displayHero = heroes[$(this).attr('id')];
+            updateDisplay(displayHero);
         });
         var $heroSort = $("<div>", {class: 'hero-sort'});
         $heroSort.html('+');
@@ -186,9 +217,48 @@ $(document).ready(function() {
         calcHeroHireCost();
     });
 
-    // When the user clicks the hire hero button to view the hire meu
+    // When the user clicks the hire hero button to view the hire menu
     $('#hire-hero-button').click(function() {
         $('#buy-hero-info').show();
         $('#view-hero-info').hide();
+    });
+
+    // When the user decides to refresh the shop
+    $('#refresh-shop').click(function() {
+        shopItems = {};
+        $('.shop-item').each(function(index) {
+            $(this).empty();
+            shopItem = new Item(ITEMTYPE.SWORD, 0, Math.floor(Math.random()*10));
+            shopItems[shopItem.itemId] = shopItem;
+            $pic = $('<div>', {class: 'shop-item-pic ' + shopItem.picClass});
+            $name = $('<div>', {class: 'shop-item-name'});
+            $name.text(shopItem.itemName);
+            $(this).append($pic);
+            $(this).append($name);
+            $(this).append(shopItem.cost + '<span class="gold-g"> G<br/></span>'+shopItem.itemClass+'<br/>L'+shopItem.level+' ' + 'Common Item<br/>');
+            for (var i=0; i<6; i++) {
+                if (shopItem.stats[i] != 0) {
+                    $statDiv = $('<div>', {class: 'shop-item-stat'});
+                    $statDiv.text(shopItem.stats[i] + ' ' + STAT_TO_STR[i]);
+                    $(this).append($statDiv);
+                }
+            }
+            $buy = $('<div>', {class: 'purchase-button'});
+            $buy.data('item-id', shopItem.itemId);
+            $buy.click(function() {
+                if ($('#personal-inventory .inventory-item').length < 48) {
+                    inventoryItems[$(this).data('item-id')] = shopItems[$(this).data('item-id')];
+                    $invenItem =  $('<div>', {class: 'inventory-item ' + shopItems[$(this).data('item-id')].picClass});
+                    $invenItem.data('item-id', $(this).data('item-id'));
+                    $invenItem.click( function() {
+                        itemClick($(this));
+                    });
+                    $('#personal-inventory .inventory-cell:empty').first().append($invenItem);
+                    $(this).parent().html('SOLD OUT');
+                }
+            });
+            $buy.text('BUY');
+            $(this).append($buy);
+        });
     });
 });

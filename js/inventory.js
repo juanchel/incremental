@@ -69,38 +69,39 @@ $(document).ready(function () {
             connectWith: '.inventory-cell',
             placeholder: 'inventory-item-sortable-placeholder',
             receive: function (event, ui) {
-                var attrWhitelist = $(this).closest('.inventory-table').attr('data-item-filter-whitelist');
-                var attrBlackList = $(this).closest('.inventory-table').attr('data-item-filter-blacklist');
-                var itemFilterWhitelistArray = attrWhitelist ? attrWhitelist.split(/\s+/) : [];
-                var itemFilterBlacklistArray = attrBlackList ? attrBlackList.split(/\s+/) : [];
-                //console.log(itemFilterWhitelistArray);
-                //console.log(itemFilterBlacklistArray);  
 
-                var attrTypeList = $(ui.item).attr('data-item-type');
-                var itemTypeListArray = attrTypeList ? attrTypeList.split(/\s+/) : [];
-                //console.log(itemTypeListArray);
+                var canMoveIntoSlot = true;
 
-                var canMoveIntoSlot = verifyWithWhiteBlackLists(itemTypeListArray, itemFilterWhitelistArray, itemFilterBlacklistArray)
+                var $sendItem = $(ui.item);
+                var $receiveItem = $(this).children().not(ui.item);
+                var $toSlot = $(this);
+                var $fromSlot = $(ui.sender);
 
                 if (!canMoveIntoSlot) {
-                    //console.log("Can't move to this slot");
-                    //$(ui.sender).sortable('cancel');
                     $(ui.item).parentToAnimate($(ui.sender), 200);
                 } else {
-
-                    // Swap places of items if dragging on top of another
-                    // Add the items in this list to the list the new item was from
                     $(this).children().not(ui.item).parentToAnimate($(ui.sender), 200);
 
-                    // $(this) is the list the item is being moved into
-                    // $(ui.sender) is the list the item came from
-                    // Don't forget the move swap items as well
-
-                    // $(this).attr('data-slot-position-x');
-                    // $(this).attr('data-slot-position-y');
-                    // $(ui.sender).attr('data-slot-position-x');
-                    // $(ui.sender).attr('data-slot-position-y');
-                    //console.log("Moving to: (" + $(this).attr('data-slot-position-x') + ", " + $(this).attr('data-slot-position-y') + ") - From: (" + $(ui.sender).attr('data-slot-position-x') + ", " + $(ui.sender).attr('data-slot-position-y') + ")");
+                    // If we're equipping something
+                    if ($toSlot.parent().parent().attr('id') == 'hero-inventory') {
+                        var ndx = 3;
+                        if ($toSlot.hasClass('inven-wep')) {
+                            var ndx = 0;
+                        }
+                        displayHero.equips[ndx] = inventoryItems[$sendItem.data('item-id')];
+                        updateStats(displayHero);
+                    } else if ($fromSlot.parent().parent().attr('id') == 'hero-inventory') {
+                        var ndx = 3;
+                        if ($fromSlot.hasClass('inven-wep')) {
+                            var ndx = 0;
+                        }
+                        if ($receiveItem) {
+                            displayHero.equips[ndx] = inventoryItems[$receiveItem.data('item-id')];
+                        } else {
+                            displayHero.equips[ndx] = null;
+                        }
+                        updateStats(displayHero);
+                    }
                 }
             }
         }).each(function () {
@@ -111,17 +112,5 @@ $(document).ready(function () {
         }).disableSelection();
     }
 
-    function verifyWithWhiteBlackLists(itemList, whiteList, blackList) {
-        return true;
-    }
-
-    $('.inventory-item').click( function() {
-        if ($(this).hasClass("inventory-selected")) {
-            $('.inventory-item').removeClass("inventory-selected");
-            return;
-        }
-        $('.inventory-item').removeClass("inventory-selected");
-        $(this).addClass("inventory-selected");
-    });
 
 });

@@ -3,6 +3,9 @@
 .inventory-table {
     margin-bottom: 10px;
 }
+#personal-inventory {
+    float: left;
+}
 .inventory-row {
     display: flex;
     flex-direction: row;
@@ -21,7 +24,7 @@
     align-content: center;
     margin-right: 2px;
     margin-bottom: 2px;
-    background: #999;
+    background: #888;
     position: relative;
 }
 .inventory-item {
@@ -34,9 +37,9 @@
     transition: opacity 0.3s ease;
 }
 .inventory-selected {
-    -webkit-box-shadow: inset 0px 0px 0px 2px #fff;
-    -moz-box-shadow: inset 0px 0px 0px 2px #fff;
-    box-shadow: inset 0px 0px 0px 2px #fff;
+    -webkit-box-shadow: inset 0px 0px 0px 2px #000;
+    -moz-box-shadow: inset 0px 0px 0px 2px #000;
+    box-shadow: inset 0px 0px 0px 2px #000;
 }
 .inventory-item-sortable-placeholder {
     display: none;
@@ -45,9 +48,9 @@
     background-position: 0px 0px;
 }
 .inventory-item.carrot {
-    background-position: -34px -34px;
+    background-position: -34px -170px;
 }
-.item-desc {
+#item-desc {
     float: right;
     height: 227px;
     width: 635px;
@@ -77,4 +80,8 @@
     width: 400px;
     right: 5px;
     top: 5px;
+}
+.item-sword {
+    background-image: url('https://i.imgur.com/ngGK5MF.png');
+    background-position: -34px -170px;
 }
