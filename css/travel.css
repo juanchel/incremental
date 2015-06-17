@@ -1,0 +1,115 @@
+#map-wrapper {
+    width: 640px;
+    height: 480px;
+    float: left;
+    overflow: hidden;
+}
+#map {
+    width: 2600px;
+    height: 1600px;
+    background: url('http://orig12.deviantart.net/59bd/f/2012/092/8/f/fantasy_world___geographical_map_by_sheep_militia-d4usa8q.jpg');
+    position: relative;
+}
+.destination {
+    background: url('../img/destination.png') no-repeat;
+    font-size: 10pt;
+    height: 32px;
+    width: 32px;
+    position: absolute;
+    overflow: visible;
+}
+
+.destination .under {
+    height: 25px;
+    width: 192px;
+    color: #fff;
+    background: rgba(0,0,0,.75);
+    position: absolute;
+    left: -80px;
+    top: -42px;
+    opacity: 0;
+    -webkit-transition: opacity 0.5s, margin 0.5s;
+    transition: opacity 0.5s, margin 0.5s;
+    padding: 4px;
+    text-align: center;
+}
+
+.destination:hover .under {
+    opacity: 1;
+    margin-top: 16px;
+}
+
+#travel-party {
+    float: right;
+    height: 400px;
+    width: 300px;
+}
+.travel-member {
+    height: 50px;
+    width: 300px;
+    border: solid 1px #000;
+    position: relative;
+    background: #aaa;
+    z-index: 0;
+}
+.travel-member ~ .travel-member {
+    height: 49px;
+    border-top: none;
+}
+.travel-portrait {
+    height: 48px;
+    width: 48px;
+    background: black;
+    background: url('../bank/head.png');
+    background-size: 48px 48px;
+    float:left;
+    border-right:solid 1px #000;
+}
+.travel-info {
+    height: 24px;
+    width: 250px;
+    left: 48px;
+    padding-top: 2px;
+    padding-left: 2px;
+    overflow: visible;
+    white-space: nowrap;
+    z-index: 0;
+}
+.travel-hp {
+    position: absolute;
+    top: 0px;
+    background:#64ff7d;
+}
+.travel-xp {
+    position: absolute;
+    bottom: 0px;
+    background:#d9ff30;
+}
+.status {
+    height: 24px;
+    width: 24px;
+    float:right;
+    position: relative;
+    z-index: 3;
+    background: url('http://orig05.deviantart.net/8dec/f/2013/259/8/3/iconset_reordenado__recoloreado_de_japozero_by_xxjapozeroxx-d6mk3qb.png');
+}
+.status.poison {
+    background-position: -24px 0px;
+}
+#dest-select {
+    height:32px;
+    width:32px;
+    background: rbga(0,0,0,0);
+    border: solid 1px #ff8030;
+    position: absolute;
+}
+#dest-keep {
+    left: 400px;
+    top: 400px;
+    background-position: 0px 0px;
+}
+#dest-forest {
+    left: 540px;
+    top: 520px;
+    background-position: 0px -32px;
+}

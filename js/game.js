@@ -246,7 +246,7 @@ $(document).ready(function() {
             $buy = $('<div>', {class: 'purchase-button'});
             $buy.data('item-id', shopItem.itemId);
             $buy.click(function() {
-                if ($('#personal-inventory .inventory-item').length < 48) {
+                if ($('#personal-inventory .inventory-item').length < 47) {
                     inventoryItems[$(this).data('item-id')] = shopItems[$(this).data('item-id')];
                     $invenItem =  $('<div>', {class: 'inventory-item ' + shopItems[$(this).data('item-id')].picClass});
                     $invenItem.data('item-id', $(this).data('item-id'));

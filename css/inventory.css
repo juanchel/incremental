@@ -52,7 +52,7 @@
 }
 #item-desc {
     float: right;
-    height: 227px;
+    height: 261px;
     width: 635px;
     background: #eef;
     border: solid 1px #000;
@@ -80,6 +80,10 @@
     width: 400px;
     right: 5px;
     top: 5px;
+}
+#sell-item {
+    position: absolute;
+    bottom: 0px;
 }
 .item-sword {
     background-image: url('https://i.imgur.com/ngGK5MF.png');
