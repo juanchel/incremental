@@ -32,4 +32,5 @@
 .accordion-section-content {
     padding: 15px;
     display: none;
+    position: relative;
 }
