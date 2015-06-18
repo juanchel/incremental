@@ -3,22 +3,20 @@ function Prof (profName, hp, str, def, intl, res, agi) {
     this.baseStat = [hp, str, def, intl, res, agi];
 }
 
-var warrior = new Prof("Warrior", 6, 6, 6, 3, 4, 5);
-warrior.desc = "Warriors desc goes here";
-warrior.baseCost = 100;
-
-var mage = new Prof("Mage", 5, 5, 5, 5, 5, 5);
-mage.desc = "Mage desc goes here";
-mage.baseCost = 100;
-
-allProfs = {
-    'warrior': warrior,
-    'mage': mage,
+var allProfs = {
+    'warrior': new Prof("Warrior", 6, 6, 6, 3, 4, 5),
+    'mage': new Prof("Mage", 5, 5, 5, 5, 5, 5),
 };
 
-availProfs = {
-    'warrior': warrior,
-    'mage': mage,
+allProfs['warrior'].desc = "Warriors desc goes here";
+allProfs['warrior'].baseCost = 100;
+
+allProfs['mage'].desc = "Mage desc goes here";
+allProfs['mage'].baseCost = 100;
+
+var availProfs = {
+    'warrior': allProfs['warrior'],
+    'mage': allProfs['mage'],
 };
 
 function LevelMult (costMult, levelMult, desc) {
@@ -40,7 +38,7 @@ function StatType (costMult, desc, getBonus) {
     this.getBonus = getBonus;
 }
 
-statTypes = {
+var statTypes = {
     'normal': new StatType(1, 'normal', function () {
         ret = [0, 0, 0, 0, 0, 0];
         for (var i = 0; i < 6; i++) {

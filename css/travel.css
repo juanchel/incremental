@@ -1,7 +1,52 @@
+#space-taker {
+    float: left;
+    width: 640px;
+    height: 480px;
+}
+#battle-back {
+    width: 640px;
+    height: 480px;
+    background: url('https://illiaworld.files.wordpress.com/2012/02/wet-cave1.jpg');
+    position: absolute;
+    display: none;
+}
+.battle-button {
+    width: 60px;
+    height: 40px;
+    margin-left: 10px;
+    float: left;
+}
+.battle-progress {
+    position: absolute;
+    right: 10px;
+    width: 120px;
+    height: 40px;
+}
+
+.battle-button,
+.battle-progress {
+    background: #82f095;
+    border: solid 1px #000;
+    border-top: none;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.battle-button:hover,
+.battle-progress:hover {
+    background: #b2ffc8;
+}
+.battle-button.disabled,
+.battle-button.disabled:hover,
+.battle-progress.disabled,
+.battle-progress.disabled:hover {
+    background: #aaa;
+}
 #map-wrapper {
     width: 640px;
     height: 480px;
     float: left;
+    position: absolute;
     overflow: hidden;
 }
 #map {
@@ -60,7 +105,6 @@
     height: 48px;
     width: 48px;
     background: black;
-    background: url('../bank/head.png');
     background-size: 48px 48px;
     float:left;
     border-right:solid 1px #000;
@@ -96,6 +140,44 @@
 .status.poison {
     background-position: -24px 0px;
 }
+#travel-info {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin:15px;
+    background:#bbb;
+    border: solid 1px #000;
+    height: 75px;
+    width: 300px;
+    padding: 3px;
+}
+#travel-desc {
+    font-size: 10pt;
+    width: 180px;
+}
+#enter-exit {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    margin: 8px;
+    height: 57px;
+    border: solid 1px #000;
+    padding: 18px;
+    background: #82f095;
+    text-align: center;
+    width: 100px;
+}
+#enter-exit:hover {
+    background: #b2ffc8;
+}
+
+.enemy-pic {
+    position: absolute;
+    background: red;
+    height: 100px;
+    width: 100px;
+}
+
 #dest-select {
     height:32px;
     width:32px;
@@ -103,10 +185,10 @@
     border: solid 1px #ff8030;
     position: absolute;
 }
-#dest-keep {
+#dest-hills {
     left: 400px;
     top: 400px;
-    background-position: 0px 0px;
+    background-position: -0px 0px;
 }
 #dest-forest {
     left: 540px;

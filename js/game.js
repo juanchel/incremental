@@ -5,10 +5,6 @@ var bountifulGold = 10;
 var heroHireCost = 100;
 var maxLevel = 100;
 
-var STAT_TO_STR = {
-    0: 'HP', 1:'ATK', 2:'DEF', 3:'INT', 4:'RES', 5:'AGI'
-}
-
 function Hire(job, worth, cost, multBy) {
     this.job = job;
     this.worth = worth;
@@ -25,36 +21,20 @@ farmer.special = 1;
 var hunter = new Hire("hunter", 1, 500, 1.05);
 
 var curHire = farmer;
-
-// When the user clicks an item to select it
-function itemClick ($thisDiv) {
-    if ($thisDiv.hasClass("inventory-selected")) {
-        $('.inventory-item').removeClass("inventory-selected");
-        return;
-    }
-    $('.inventory-item').removeClass("inventory-selected");
-    $thisDiv.addClass("inventory-selected");
-
-    invenItem = inventoryItems[$thisDiv.data('item-id')];
-    $('#item-desc').html('<b>' + invenItem.itemName + '</b></br>'+invenItem.itemClass+'<br/>');
-    for (var i=0; i<6; i++) {
-        if (invenItem.stats[i] != 0) {
-            $statDiv = $('<div>', {class: 'item-stat'});
-            $statDiv.text(invenItem.stats[i] + ' ' + STAT_TO_STR[i]);
-            $('#item-desc').append($statDiv);
-        }
-    }
-    $('#item-desc').append('<div style="clear:both"></div>');
-    $flavor = $('<div>', {class: 'item-flavor'});
-    $flavor.text('A sword.');
-    $('#item-desc').append($flavor);
-    $right = $('<div>', {class: 'item-right'});
-    $right.html(invenItem.cost+' <span class="gold-g">G</span><br/> L'+invenItem.level+' Common Item');
-    $('#item-desc').append($right);
-}
+var stepCount = 0;
 
 // Every tick of time
 function takeStep() {
+    stepCount++;
+
+    if (stepCount == 100) {
+        stepCount = 0;
+    }
+
+    if (stepCount % 10 == 0 && curArea != 'map' && !battlePause) {
+        doBattle();
+    }
+
     // Add gold and update buy buttons
     gold += goldDelta;
     $('#current-gold').text(Math.floor(gold/10));
@@ -92,26 +72,17 @@ function takeStep() {
 }
 
 function calcBountifulGold() {
-    hg = (farmer.special * farmer.amount * 10 + 10);
+    var hg = (farmer.special * farmer.amount * 10 + 10);
     bountifulGold = hg;
     $('#bountiful-value').text(hg / 10);
     return hg;
 }
 
 function calcGoldDelta() {
-    delta = hunter.worth * hunter.amount;
+    var delta = hunter.worth * hunter.amount;
     goldDelta = delta;
     $("#current-gold-delta").text(delta);
     return delta;
-}
-
-function calcHeroHireCost() {
-    baseCost = allProfs[$('#hero-class').val()].baseCost;
-    levelMult = levelMults[$('#hero-level-mult').val()].costMult;
-    statTypeCost = statTypes[$('#hero-stat-type').val()].costMult;
-    hhc = baseCost * levelMult * statTypeCost;
-    $("#hire-hero-cost").text(hhc / 10);
-    return hhc;
 }
 
 $(document).ready(function() {
@@ -159,10 +130,10 @@ $(document).ready(function() {
 
     // When the user tries to hire a hero
     $('#hire-hero-confirm').click(function() {
-        levelMult = Math.floor(levelMults[$('#hero-level-mult').val()].levelMult * maxLevel) + 1;
-        hiredHero = new Hero('Sam', allProfs[$('#hero-class').val()], levelMult);
+        var levelMult = Math.floor(levelMults[$('#hero-level-mult').val()].levelMult * maxLevel) + 1;
+        var hiredHero = new Hero('Sam', allProfs[$('#hero-class').val()], levelMult);
         hiredHero.setInitialStats(statTypes[$('#hero-stat-type').val()]);
-        hiredId = 'hero' + nextHeroId;
+        var hiredId = 'hero' + nextHeroId;
         heroes[hiredId] = hiredHero;
         nextHeroId++;
 
@@ -189,10 +160,16 @@ $(document).ready(function() {
                 $(this).parent().insertAfter($('.party-select .in-party:last'));
                 $(this).parent().addClass('in-party');
                 $(this).html('&ndash;');
+                var heroId = $(this).parent().attr('id');
+                travelParty.push(heroId);
+                addToTravel(heroId);
             } else {
                 $(this).parent().removeClass('in-party');
                 $(this).html('+');
                 $(this).parent().insertAfter($('.party-select .in-party:last'));
+                travelParty.splice(travelParty.indexOf(heroId), 1);
+                var heroId = $(this).parent().attr('id');
+                removeFromTravel(heroId);
             }
         });
         $heroInnerItem.append($heroSort);
@@ -228,27 +205,27 @@ $(document).ready(function() {
         shopItems = {};
         $('.shop-item').each(function(index) {
             $(this).empty();
-            shopItem = new Item(ITEMTYPE.SWORD, 0, Math.floor(Math.random()*10));
+            var shopItem = new Item(ITEMTYPE.SWORD, 0, Math.floor(Math.random()*10));
             shopItems[shopItem.itemId] = shopItem;
-            $pic = $('<div>', {class: 'shop-item-pic ' + shopItem.picClass});
-            $name = $('<div>', {class: 'shop-item-name'});
+            var $pic = $('<div>', {class: 'shop-item-pic ' + shopItem.picClass});
+            var $name = $('<div>', {class: 'shop-item-name'});
             $name.text(shopItem.itemName);
             $(this).append($pic);
             $(this).append($name);
             $(this).append(shopItem.cost + '<span class="gold-g"> G<br/></span>'+shopItem.itemClass+'<br/>L'+shopItem.level+' ' + 'Common Item<br/>');
             for (var i=0; i<6; i++) {
                 if (shopItem.stats[i] != 0) {
-                    $statDiv = $('<div>', {class: 'shop-item-stat'});
+                    var $statDiv = $('<div>', {class: 'shop-item-stat'});
                     $statDiv.text(shopItem.stats[i] + ' ' + STAT_TO_STR[i]);
                     $(this).append($statDiv);
                 }
             }
-            $buy = $('<div>', {class: 'purchase-button'});
+            var $buy = $('<div>', {class: 'purchase-button'});
             $buy.data('item-id', shopItem.itemId);
             $buy.click(function() {
                 if ($('#personal-inventory .inventory-item').length < 47) {
                     inventoryItems[$(this).data('item-id')] = shopItems[$(this).data('item-id')];
-                    $invenItem =  $('<div>', {class: 'inventory-item ' + shopItems[$(this).data('item-id')].picClass});
+                    var $invenItem =  $('<div>', {class: 'inventory-item ' + shopItems[$(this).data('item-id')].picClass});
                     $invenItem.data('item-id', $(this).data('item-id'));
                     $invenItem.click( function() {
                         itemClick($(this));
