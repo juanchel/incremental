@@ -184,7 +184,6 @@ a:hover {
 }
 .modal-footer {
     border-top: #eeeeee solid 1px;
-    text-align: right;
 }
 #close {
     display: none;

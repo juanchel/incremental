@@ -27,13 +27,14 @@
 
 /* BATTLE LOG */
 
-.battle-log {
+#battle-log {
     border: solid 1px #000;
     width: 687px;
     height: 332px;
     background: #eee;
     float: left;
     padding: 0px 8px;
+    overflow: auto;
 }
 .battle-event {
     font-size: 11pt;

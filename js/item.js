@@ -12,7 +12,11 @@ var ITEMCLASS = {
     CONSUMABLE: 7,
 }
 
-nextItemId = 0
+var STAT_TO_STR = {
+    0: 'HP', 1:'ATK', 2:'DEF', 3:'INT', 4:'RES', 5:'AGI'
+}
+
+var nextItemId = 0
 
 function Item (itemType, rarity, level) {
     this.level = level;
@@ -28,10 +32,37 @@ function Item (itemType, rarity, level) {
     }
 }
 
-shopItems = {
+var shopItems = {
 
 }
 
-inventoryItems = {
+var inventoryItems = {
 
+}
+
+// When the user clicks an item to select it
+function itemClick ($thisDiv) {
+    if ($thisDiv.hasClass("inventory-selected")) {
+        $('.inventory-item').removeClass("inventory-selected");
+        return;
+    }
+    $('.inventory-item').removeClass("inventory-selected");
+    $thisDiv.addClass("inventory-selected");
+
+    invenItem = inventoryItems[$thisDiv.data('item-id')];
+    $('#item-desc').html('<b>' + invenItem.itemName + '</b></br>'+invenItem.itemClass+'<br/>');
+    for (var i=0; i<6; i++) {
+        if (invenItem.stats[i] != 0) {
+            $statDiv = $('<div>', {class: 'item-stat'});
+            $statDiv.text(invenItem.stats[i] + ' ' + STAT_TO_STR[i]);
+            $('#item-desc').append($statDiv);
+        }
+    }
+    $('#item-desc').append('<div style="clear:both"></div>');
+    $flavor = $('<div>', {class: 'item-flavor'});
+    $flavor.text('A sword.');
+    $('#item-desc').append($flavor);
+    $right = $('<div>', {class: 'item-right'});
+    $right.html(invenItem.cost+' <span class="gold-g">G</span><br/> L'+invenItem.level+' Common Item');
+    $('#item-desc').append($right);
 }

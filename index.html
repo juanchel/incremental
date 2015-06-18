@@ -18,12 +18,15 @@
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.0/jquery.scrollTo.min.js"></script>
+        <script type="text/javascript" src="js/log.js"></script>
+        <script type="text/javascript" src="js/travel.js"></script>
         <script type="text/javascript" src="js/research.js"></script>
         <script type="text/javascript" src="js/prof.js"></script>
         <script type="text/javascript" src="js/hero.js"></script>
         <script type="text/javascript" src="js/item.js"></script>
+        <script type="text/javascript" src="js/enemy.js"></script>
+        <script type="text/javascript" src="js/battler.js"></script>
         <script type="text/javascript" src="js/game.js"></script>
-        <script type="text/javascript" src="js/travel.js"></script>
         <script type="text/javascript" src="js/accordion.js"></script>
         <script type="text/javascript" src="js/inventory.js"></script>
     </head>
@@ -42,7 +45,7 @@
                             <div class="inner">
                             </div>
                         </div>
-                        <div class="battle-log"></div>
+                        <div id="battle-log"></div>
                         <div style="clear:both"></div>
                     </div>
                     <!--end .accordion-section-content-->
@@ -51,61 +54,24 @@
                 <div class="accordion-section">
                     <div class="accordion-section-title" href="#accordion-7">Travel</div>
                     <div id="accordion-7" class="accordion-section-content">
+                        <div id="space-taker"></div>
                         <div id="map-wrapper">
                             <div id="map">
                                 <div id='dest-select'></div>
-                                <div class='destination' id='dest-keep'><div class="under">L1 Rolling Hills</div></div>
+                                <div class='destination' id='dest-hills'><div class="under">L1 Rolling Hills</div></div>
                                 <div class='destination' id='dest-forest'><div class="under">L5 Forest of Beginnings</div></div>
                             </div>
                         </div>
+                        <div id="battle-back">
+                            <div class="battle-button" id="pause-button">&#10074;&#10074;</div>
+                            <div class="battle-button disabled" id="play-button">&#9654;</div>
+                            <div class="battle-button disabled" id="step-button">Step</div>
+                            <div class="battle-progress disabled" id="boss-button">Checkpoint 0</div>
+                        </div>
                         <div id="travel-party">
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
-                            </div>
-                            <div class="travel-member">
-                                <div class="travel-portrait"></div>
-                                <div class="status poison"></div>
-                                <div class="travel-info travel-hp"><span class="number">5000</span> </div>
-                                <div class="travel-info travel-xp"><span class="number">L32</span> Aristocrat <b>Sam</b></div>
+                            <div id="travel-info">
+                                <div id="travel-desc"><b>Rolling Hills</b><br/>Unexplored</div>
+                                <div id="enter-exit">Enter</div>
                             </div>
                         </div>
                         <div style="clear:both"></div>
@@ -437,7 +403,7 @@
             <div class="modal-body">
                 Are you sure you want to delete?
             </div>
-            <div class="modal-fotter">
+            <div class="modal-footer">
                 <a href="#close" class="btn">Yes</a>
             </div>
         </div>
